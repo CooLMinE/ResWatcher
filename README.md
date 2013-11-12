@@ -12,3 +12,5 @@ ResWatcher is a lightweight and portable utility that displays the resource usag
 	<li>Displays the top 5 processes in terms of CPU usage, making it easy to find the processes that slow your system down.</li>
 	<li>Minimizes to the traybar in order to give your more taskbar space for your important applications.</li>
 </ul>
+
+http://www.fluxbytes.com/software-releases/reswatcher-is-now-available/
