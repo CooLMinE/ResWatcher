@@ -72,7 +72,7 @@ namespace ResWatcher.Monitors
 
         public NetworkMonitor()
         {
-            primaryInterface = NetworkInterface.GetAllNetworkInterfaces()[0];
+            AssignNewInterfaceDevice();
             isNetworkAvailable = NetworkInterface.GetIsNetworkAvailable();
             NetworkChange.NetworkAvailabilityChanged += new NetworkAvailabilityChangedEventHandler(NetworkChange_NetworkAvailabilityChanged);
             lastUpdateTime = DateTime.Now;
@@ -108,7 +108,7 @@ namespace ResWatcher.Monitors
         /// </summary>
         public void AssignNewInterfaceDevice()
         {
-            primaryInterface = NetworkInterface.GetAllNetworkInterfaces()[0];
+            primaryInterface = NetworkInterface.GetAllNetworkInterfaces().Where(nic => nic.OperationalStatus == OperationalStatus.Up).FirstOrDefault();
             Reset(false);
         }
 
@@ -127,7 +127,7 @@ namespace ResWatcher.Monitors
         /// </summary>
         public void UpdateStatistics()
         {
-            if (isNetworkAvailable)
+            if (isNetworkAvailable && primaryInterface != null)
             {
                 long currentBytesReceived = primaryInterface.GetIPv4Statistics().BytesReceived;
                 long currentBytesSent = primaryInterface.GetIPv4Statistics().BytesSent;
