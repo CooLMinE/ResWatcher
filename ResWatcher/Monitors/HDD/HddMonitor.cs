@@ -27,6 +27,16 @@ namespace ResWatcher.Monitors
     class HddMonitor
     {
         /// <summary>
+        /// Retrieves a collection of management objects based on a specified query.
+        /// </summary>
+        ManagementObjectSearcher searcher;
+
+        public HddMonitor()
+        {
+            searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
+        }
+
+        /// <summary>
         /// List all available hard drives on the system.
         /// </summary>
         /// <returns>Returns a list that contains the letters of the available hard drives.</returns>
@@ -102,7 +112,6 @@ namespace ResWatcher.Monitors
         /// <returns>Returns the drive type if available, otherwise it returns <b>"N/A"</b>.</returns>
         public string GetDriveType(string hddLetter)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
             string result = "N/A";
 
             foreach (var hdd in searcher.Get())
