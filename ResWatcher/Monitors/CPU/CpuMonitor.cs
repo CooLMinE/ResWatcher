@@ -33,11 +33,6 @@ namespace ResWatcher.Monitors
         PerformanceCounter counterUptime;
 
         /// <summary>
-        /// Performance category for processes.
-        /// </summary>
-        PerformanceCounterCategory processCategory;
-
-        /// <summary>
         /// Current process list with their performance counter.
         /// </summary>
         HashSet<ProcessCpuInfo> processList;
@@ -46,7 +41,6 @@ namespace ResWatcher.Monitors
         {
             counterCpuUsage = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             counterUptime = new PerformanceCounter("System", "System Up Time");
-            processCategory = new PerformanceCounterCategory("Process");
             processList = new HashSet<ProcessCpuInfo>();
 
             counterCpuUsage.NextValue();
